@@ -1,17 +1,19 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = input()
-r = requests.get('https://search.yahoo.com/search;_ylc=X3oDMTFiN25laTRvBF9TAzIwMjM1MzgwNzUEaXRjAzEEc2VjA3NyY2hfcWEEc2xrA3NyY2h3ZWI-?p=cats&fr=yfp-t&fp=1&toggle=1&cop=mss&ei=UTF-8')
+print('Please enter URL: ')
+url = 'https://search.yahoo.com/search;_ylc=X3oDMTFiN25laTRvBF9TAzIwMjM1MzgwNzUEaXRjAzEEc2VjA3NyY2hfcWEEc2xrA3NyY2h3ZWI-?p=cats&fr=yfp-t&fp=1&toggle=1&cop=mss&ei=UTF-8'
+r = requests.get(url)
 data = r.content
 
-soup = BeautifulSoup(data)
+soup = BeautifulSoup(data,'html.parser')
 
 list = []
 
-for link in soup.find_all('a'):
-    list.append(link.get('href'))
+if 'yahoo' in url:
+    for x in soup.find_all('ol', class_= 'mb-15 reg searchCenterMiddle'):
+        for y in x.find_all('a'):
+            print(y.get('href'))
 
-for link in list:
-    if 'yahoo' not in link:
-        print(link)
+
+#yahoo class=:"mb-15 reg searchCenterMiddle"

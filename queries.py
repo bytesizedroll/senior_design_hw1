@@ -22,7 +22,7 @@ queries = {
 results = {}
 random.shuffle(urls)
 for i, query in enumerate(queries):
-    print('query %d: %s' % (i, query))
+    print('query %d: %s' % (i + 1, query))
     for url in urls:
         query_results = scraper(url[1] % query)
         results['query_%s' % str(i)] = query_results
@@ -31,3 +31,4 @@ for i, query in enumerate(queries):
         print('%s: %d' % (url[0], grade))
     print('totals:')
     print(totals)
+    print('\n')

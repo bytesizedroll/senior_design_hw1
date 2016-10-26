@@ -23,12 +23,15 @@ results = {}
 random.shuffle(urls)
 for i, query in enumerate(queries):
     print('query %d: %s' % (i + 1, query))
-    for url in urls:
+    for x, url in enumerate(urls):
         query_results = scraper(url[1] % query)
         results['query_%s' % str(i)] = query_results
         grade = grader(query_results, queries[query])
         totals[url[0]] += grade
-        print('%s: %d' % (url[0], grade))
-    print('totals:')
-    print(totals)
+        print('Search engine %s: %d' % (x + 1, grade))
     print('\n')
+
+print('totals:')
+print(totals)
+print('Search engines: \n 1: %s \n 2: %s \n 3: %s\n' % (urls[0][0], urls[1][0], urls[2][0]))
+print('Winner: %s' % max(totals, key=totals.get))
